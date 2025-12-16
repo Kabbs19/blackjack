@@ -1,0 +1,254 @@
+@import url('alpino.css');
+
+@layer reset, base, components, utilities;
+
+@layer reset {
+    *, *::before, *::after { box-sizing: border-box; }
+    * { min-width: 0; }
+    html:focus-within { scroll-behavior: smooth; }
+    html, body { height: 100%; }
+    body { margin: 0; line-height: 1.5; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    textarea { resize: vertical; }
+    :where(ul,ol) { padding-inline-start: 1.2rem; }
+    :where(p, h1, h2, h3, h4, h5, h6, ul, ol, dl, figure) { margin: 0; }
+    :where(a) { color: inherit; text-decoration-skip-ink: auto; }
+}
+
+@layer base {
+    :root {
+        color-scheme: light dark;
+
+    /* Brand colors */
+    --gray-0: hsl(0 0 99%);
+    --light-gray: hsl(43 13% 90%);
+    --gray: hsl(35 9% 75%);
+    --dark-gray: hsl(30 5% 22%);
+    --black: hsl(228 40.5% 7.3%); /* #0b0e1a */
+    --white: hsl(216 27.8% 92.9%); /* #e8ecf2 */
+    --dark-blue: hsl(231 63% 10.6%); /* #0a0f2c */
+    --light-blue: hsl(189 100% 50%); /* #00d9ff */
+    --green: hsl(157 100% 50%); /* #00ff9c */
+    --purple: hsl(267 72.3% 63.1%); /* #9b5de5 */
+
+    /* Semantic tokens */
+    --bg: var(--gray-0);
+    --fg: var(--black);
+    --muted: var(--dark-gray);
+    --surface: var(--light-gray);
+    --border: var(--gray);
+    --link: var(--gold);
+    --focus: var(--sand); 
+
+    /* Spacing */
+    --space-1: 0.25rem; /* 4px */
+    --space-2: 0.5rem; /* 8px */
+    --space-3: 0.75rem; /* 12px */
+    --space-4: 1rem; /* 16px */
+    --space-5: 1.5rem; /* 24px */
+    --space-6: 2rem; /* 32px */
+    --space-7: 3rem; /* 48px */
+    --space-8: 4rem; /* 64px */
+
+    /* Radii & shadows */
+    --radius-sm: 0.375rem; /* 6px */
+    --radius-md: 0.75rem; /* 12px */
+    --radius-lg: 1rem; /* 16px */
+
+    --shadow-1: 0 1px 2px hsl(240 10% 10% / 0.06);
+    --shadow-2: 0 2px 8px hsl(240 10% 10% / 0.10);
+    --shadow-3: 0 12px 24px hsl(240 10% 10% / 0.18);
+
+    /* z-index map */
+    --z-dropdown: 1000; --z-sticky: 1100; --z-modal: 1200; --z-toast: 1300;
+
+    /* Containers */
+    --container-sm: 48rem; /* 768px */
+    --container-md: 64rem; /* 1024px */
+    --container-lg: 80rem; /* 1280px */
+
+      /* Fluid type scale (clamp) */
+
+    --step--tiny: clamp(0.74rem, calc(0.70rem + 0.20vw), 0.84rem); /* small UI / labels */
+    --step--small: clamp(0.88rem, calc(0.84rem + 0.22vw), 1.00rem); /* small text / captions */
+    --step-body:  clamp(1.00rem, calc(0.97rem + 0.25vw), 1.12rem); /* body text */
+    --step-6:  clamp(1.25rem, calc(1.08rem + 0.35vw), 1.45rem); /* h6 */
+    --step-5:  clamp(1.56rem, calc(1.18rem + 0.50vw), 1.80rem); /* h5 */
+    --step-4:  clamp(1.94rem, calc(1.30rem + 0.70vw), 2.20rem); /* h4 */
+    --step-3:  clamp(2.44rem, calc(1.42rem + 0.95vw), 2.80rem); /* h3 */
+    --step-2:  clamp(3.06rem, calc(1.56rem + 1.25vw), 3.60rem); /* h2 */
+    --step-1:  clamp(3.81rem, calc(1.70rem + 1.50vw), 4.50rem); /* h1 */
+  }
+
+
+    }
+
+    @supports (color: oklch(60% 0.1 0)) {
+        :root {
+            --gray-0: oklch(99% 0 0);
+            --light-gray: oklch(0.9251 0.0071 88.65);
+            --gray: oklch(0.8067 0.0112 76.58);
+            --dark-gray: oklch(0.3466 0.0066 67.61);
+            --black: oklch(0.167 0.026 273); /* #0b0e1a */
+            --white: oklch(0.942 0.009 258); /* #e8ecf2 */
+            --dark-blue: oklch(0.184 0.059 272); /* #0a0f2c */
+            --light-blue: oklch(0.816 0.145 217); /* #00d9ff */
+            --green: oklch(0.88 0.211 157); /* #00ff9c */
+            --purple: oklch(0.611 0.2 302); /* #9b5de5 */
+        }
+  }
+
+  [data-theme="dark"] {
+    --bg: var(--dark-blue);
+    --fg: var(--white);
+    --muted: oklch(0.8067 0.0112 76.58);
+    --surface: oklch(0.2315 0.0024 67.7);
+    --border: oklch(0.3466 0.0066 67.61);
+    --link: var(--green);
+  }
+
+   body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, 'Alpino', sans-serif;
+    font-size: var(--step-body);
+  }
+
+   /* Global links */
+  a { color: var(--link); text-underline-offset: 0.2em; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  /* Headings — use fluid steps */
+  h1 { font-size: var(--step-1); line-height: 1.1; }
+  h2 { font-size: var(--step-2); line-height: 1.2; }
+  h3 { font-size: var(--step-3); line-height: 1.25; }
+  h4 { font-size: var(--step-4); }
+  h5 { font-size: var(--step-5); }
+  h6 { font-size: var(--step-6); }
+
+   /* Focus styles: accessible and visible */
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+   /* Containers */
+  .container { width: min(100% - 2rem, var(--container-lg)); margin-inline: auto; }
+  .container-sm { width: min(100% - 2rem, var(--container-sm)); margin-inline: auto; }
+  .container-md { width: min(100% - 2rem, var(--container-md)); margin-inline: auto; }
+
+  /* Selection */
+  ::selection { background: var(--gold); color: white; }
+}
+
+/* 4) Components */
+@layer components {
+  /* Button */
+  .btn {
+    --_bg: var(--gold);
+    --_fg: var(--white);
+    display: inline-flex; align-items: center; gap: 0.5ch;
+    padding: 0.6em 1em;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background: var(--_bg); color: var(--_fg);
+    box-shadow: var(--shadow-1);
+    cursor: pointer; text-decoration: none; font-weight: 600;
+    transition: translate 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  }
+  .btn:hover { translate: 0 -1px; box-shadow: var(--shadow-2); }
+  .btn:active { translate: 0; box-shadow: var(--shadow-1); }
+  .btn[disabled], .btn:disabled { opacity: 0.6; pointer-events: none; }
+  .btn--ghost { --_bg: transparent; --_fg: var(--fg); border-color: var(--border); }
+  .btn--danger { --_bg: var(--danger-6); }
+  .btn--success { --_bg: var(--success-6); }
+
+  /* Card */
+  .card { 
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
+    padding: var(--space-5);
+    container-type: inline-size;
+  }
+  .card + .card { margin-top: var(--space-4); }
+
+  /* Forms */
+  :where(label) { font-weight: 600; }
+  :where(input, select, textarea) {
+    width: 100%; padding: 0.6em 0.75em;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg); color: inherit;
+  }
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+  input[type="checkbox"], input[type="radio"] { width: 1.1em; height: 1.1em; }
+  input, select, textarea { accent-color: var(--brand-6); }
+  fieldset { border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-4); }
+  legend { padding: 0 var(--space-2); }
+}
+
+/* 5) Utilities */
+@layer utilities {
+  /* Flow: vertical rhythm in prose UIs */
+  .flow > * + * { margin-top: var(--flow-space, 1em); }
+
+  /* Stacks & clusters */
+  .stack { display: grid; gap: var(--space-4); }
+  .cluster { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+  .center { box-sizing: content-box; margin-inline: auto; max-width: var(--container-md); padding-inline: 1rem; }
+
+  /* Grid helpers */
+  .grid { display: grid; gap: var(--space-4); }
+  .grid--auto-fit { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+
+  /* Visibility */
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  /* Text helpers */
+  .muted { color: var(--muted); }
+  .lead { font-size: var(--step-1); color: var(--muted); }
+  .nowrap { white-space: nowrap; }
+  .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* Spacing utilities (example subset) */
+  .mt-4 { margin-top: var(--space-4); } .mb-4 { margin-bottom: var(--space-4); }
+  .pt-4 { padding-top: var(--space-4); } .pb-4 { padding-bottom: var(--space-4); }
+  .p-4 { padding: var(--space-4); } .p-5 { padding: var(--space-5); }
+
+  /* Width constraints */
+  .measure { max-width: 65ch; }
+
+  /* Elevation */
+  .shadow-1 { box-shadow: var(--shadow-1); }
+  .shadow-2 { box-shadow: var(--shadow-2); }
+  .shadow-3 { box-shadow: var(--shadow-3); }
+}
+
+/* 6) Container queries example */
+@container (min-width: 36rem) {
+  .card--media { display: grid; grid-template-columns: 2fr 3fr; gap: var(--space-4); align-items: center; }
+}
+
+/* 7) Media features: motion & contrast */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+@media (prefers-contrast: more) {
+  :root { --border: hsl(240 5% 65%); }
+  :focus-visible { outline-width: 4px; }
+}
+
+/* 8) Print tweaks (minimal) */
+@media print {
+  * { box-shadow: none !important; background: transparent !important; }
+  a { text-decoration: underline; }
+  .btn, nav, .no-print { display: none !important; }
+}
+
+/* 9) Example CSS custom properties you can override per‑page/component:
+   :root { --flow-space: 1.25em; }
+   .card { --flow-space: 0.75em; }
+*/
