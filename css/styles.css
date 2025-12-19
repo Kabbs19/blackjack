@@ -140,7 +140,6 @@
 
   /* Selection */
   ::selection { background: var(--gold); color: white; }
-}
 
 /* 4) Components */
 @layer components {
