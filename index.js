@@ -10,13 +10,19 @@ if (age < 21) {
 
 let firstCard = 2;
 let secondCard = 3;
-
 let sum = firstCard + secondCard;
+let hasBlackJack = false
+let isAlive = true
+let message = ""
+
+
 
 if (sum < 21) {
-    console.log("Do you want another card?")
+    message = "Do you want another card?"
 } else if (sum === 21) {
-    console.log("You've got blackjack!")
+    message = "You've got blackjack!"
+    hasBlackJack = true
 } else { 
-    console.log("You're out of the game!")
+    message = "You're out of the game!"
+    isAlive = false
 }
