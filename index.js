@@ -16,13 +16,14 @@ let isAlive = true
 let message = ""
 
 
-
-if (sum < 21) {
-    message = "Do you want another card?"
-} else if (sum === 21) {
-    message = "You've got blackjack!"
-    hasBlackJack = true
-} else { 
-    message = "You're out of the game!"
-    isAlive = false
+function startGame() {
+    if (sum < 21) {
+        message = "Do you want another card?"
+    } else if (sum === 21) {
+        message = "You've got blackjack!"
+        hasBlackJack = true
+    } else { 
+        message = "You're out of the game!"
+        isAlive = false
+    }
 }
