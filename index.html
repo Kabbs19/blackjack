@@ -14,16 +14,17 @@
         <div class="flex flex-col items-center gap-lg">
             <div id="dealer-hand" class="flex flex-col items-center">
                 <h5 class="blue-f">Dealer Hand</h5>
-                <p>Cards:</p>
-                <p>Sum:</p>        
+                <p id="dealer-cards-el">Cards:</p>
+                <p id="dealer-sum-el">Sum:</p>        
             </div>
             <div id="player-hand" class="flex flex-col items-center">
                 <h5 class="green-f">Player Hand</h5>
-                <p>Cards:</p>
-                <p>Sum:</p>
+                <p id="player-cards-el">Cards:</p>
+                <p id="player-sum-el">Sum:</p>
             </div> 
-            <div>
-                <button class="purple-btn" onlclick="startGame()">START GAME</button>
+            <div class="flex flex-col gap-xs items-center">
+                <button class="btn purple-btn" onclick="startGame()">START GAME</button>
+                <button class="btn white-btn" onclick="newCard()">NEW CARD</button>
             </div>
         </div>   
         <script src="index.js"></script>
