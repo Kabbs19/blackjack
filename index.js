@@ -11,6 +11,10 @@ if (age < 21) {
 let firstCard = 2;
 let secondCard = 3;
 let sum = firstCard + secondCard
+let playerCards = [
+    firstCard,
+    secondCard
+]
 let hasBlackJack = false
 let isAlive = true
 let message = ""
@@ -18,9 +22,12 @@ let messageEl = document.getElementById("message-el")
 let playerSumEl = document.querySelector("#player-sum-el")
 let playerCardsEl = document.querySelector("#player-cards-el")
 
-
 function startGame() {
-    playerCardsEl.textContent = "Cards: " + firstCard + " + " + secondCard
+    renderGame()
+}
+
+function renderGame() {
+    playerCardsEl.textContent = "Cards: " + playerCards[0] + " + " + playerCards[1]
     playerSumEl.textContent = "Sum: " + sum
     if (sum < 21) {
         message = "Do you want another card?"
@@ -38,5 +45,7 @@ function newCard() {
     console.log("Drawing a new card from the deck!")
     let card = 10
     sum += card
-    startGame()
+    playerCards.push(card)
+    console.log(playerCards)
+    renderGame()
 }
